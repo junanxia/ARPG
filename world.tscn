@@ -1,28 +1,19 @@
-[gd_scene load_steps=5 format=3 uid="uid://snhapmxv138n"]
+[gd_scene load_steps=3 format=3 uid="uid://snhapmxv138n"]
 
-[ext_resource type="Texture2D" uid="uid://bfnfyi1vvn3eo" path="res://Player/Player.png" id="1_f3sb7"]
-[ext_resource type="Texture2D" uid="uid://cd6ds8sdtuck5" path="res://World/Bush.png" id="2_fj7yv"]
-[ext_resource type="Script" uid="uid://dg1kc71kc5gxu" path="res://Scripts/player.gd" id="2_tlwt5"]
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tlwt5"]
-radius = 6.0
-height = 22.0
+[ext_resource type="PackedScene" uid="uid://b3cjp5uhvwvd1" path="res://World/Brush.tscn" id="2_fj7yv"]
+[ext_resource type="PackedScene" uid="uid://c4mgf1qb7igyv" path="res://Player/player.tscn" id="2_tlwt5"]
 
 [node name="World" type="Node2D"]
+y_sort_enabled = true
 
-[node name="Bush" type="Sprite2D" parent="."]
-position = Vector2(94, 31)
-texture = ExtResource("2_fj7yv")
-
-[node name="Player" type="CharacterBody2D" parent="."]
+[node name="Player" parent="." instance=ExtResource("2_tlwt5")]
 position = Vector2(50, 56)
-script = ExtResource("2_tlwt5")
-metadata/_edit_group_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="Player"]
-texture = ExtResource("1_f3sb7")
-hframes = 60
+[node name="StaticBody2D" parent="." instance=ExtResource("2_fj7yv")]
+position = Vector2(98, 90)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-position = Vector2(-2, 1)
-shape = SubResource("CapsuleShape2D_tlwt5")
+[node name="StaticBody2D2" parent="." instance=ExtResource("2_fj7yv")]
+position = Vector2(169, 61)
+
+[node name="StaticBody2D3" parent="." instance=ExtResource("2_fj7yv")]
+position = Vector2(47, 140)

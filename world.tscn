@@ -1,10 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://snhapmxv138n"]
+[gd_scene load_steps=4 format=3 uid="uid://snhapmxv138n"]
 
+[ext_resource type="Texture2D" uid="uid://pupau2pnvy8b" path="res://World/GrassBackground.png" id="1_tlwt5"]
 [ext_resource type="PackedScene" uid="uid://b3cjp5uhvwvd1" path="res://World/Brush.tscn" id="2_fj7yv"]
 [ext_resource type="PackedScene" uid="uid://c4mgf1qb7igyv" path="res://Player/player.tscn" id="2_tlwt5"]
 
 [node name="World" type="Node2D"]
 y_sort_enabled = true
+
+[node name="Background" type="Sprite2D" parent="."]
+texture_repeat = 2
+texture = ExtResource("1_tlwt5")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 320, 180)
 
 [node name="Player" parent="." instance=ExtResource("2_tlwt5")]
 position = Vector2(50, 56)

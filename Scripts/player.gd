@@ -4,7 +4,6 @@ const ACCELERATION = 500
 const MAX_SPEED = 100
 const FRICTION = 500
 
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var animation_state = animation_tree.get("parameters/playback")
 
@@ -19,7 +18,7 @@ func _physics_process(_delta: float) -> void:
 		animation_tree.set("parameters/Idle/blend_position", input_vec)
 		animation_tree.set("parameters/Run/blend_position", input_vec)
 		animation_state.travel("Run")
-		
+
 		velocity = velocity.move_toward(input_vec * MAX_SPEED, ACCELERATION)
 	else:
 		animation_state.travel("Idle")

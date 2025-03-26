@@ -1,5 +1,13 @@
 extends CharacterBody2D
 
+enum {
+	MOVE,
+	ATTACK,
+	ROLL,
+	IDEL,
+}
+
+var state = MOVE
 const ACCELERATION = 500
 const MAX_SPEED = 100
 const FRICTION = 500
@@ -8,6 +16,15 @@ const FRICTION = 500
 @onready var animation_state = animation_tree.get("parameters/playback")
 
 func _physics_process(_delta: float) -> void:
+	match state:
+		MOVE:
+			move_state()
+		ATTACK:
+			attack_state()
+		ROLL:
+			roll_state()
+
+func move_state():
 	var input_vec = Vector2.ZERO
 	
 	input_vec.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
@@ -17,11 +34,24 @@ func _physics_process(_delta: float) -> void:
 	if input_vec != Vector2.ZERO:
 		animation_tree.set("parameters/Idle/blend_position", input_vec)
 		animation_tree.set("parameters/Run/blend_position", input_vec)
-		animation_state.travel("Run")
-
+		animation_tree.set("parameters/Attack/blend_position", input_vec)
+		animation_state.travel("Run")	
+		
 		velocity = velocity.move_toward(input_vec * MAX_SPEED, ACCELERATION)
 	else:
 		animation_state.travel("Idle")
 		velocity = velocity.move_toward(Vector2.ZERO, FRICTION)
 	
 	move_and_slide()
+	
+	if Input.is_action_just_pressed("attack"):
+		state = ATTACK
+	
+func attack_state():
+	animation_state.travel("Attack")
+
+func roll_state():
+	pass
+	
+func attack_finished():
+	state = MOVE

@@ -10,10 +10,17 @@ enum {
 var state = MOVE
 const ACCELERATION = 500
 const MAX_SPEED = 100
+const ROLL_SPEED = 100
 const FRICTION = 500
+var roll_vector = Vector2.DOWN
 
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var animation_state = animation_tree.get("parameters/playback")
+@onready var sword_hitbox: Area2D = $HitboxPivot/SwordHitbox
+
+func _ready() -> void:
+	animation_tree.active = true
+	sword_hitbox.knockback_vector = roll_vector
 
 func _physics_process(_delta: float) -> void:
 	match state:
@@ -32,9 +39,13 @@ func move_state():
 	input_vec = input_vec.normalized()
 	
 	if input_vec != Vector2.ZERO:
+		roll_vector = input_vec
+		sword_hitbox.knockback_vector = roll_vector
+		
 		animation_tree.set("parameters/Idle/blend_position", input_vec)
 		animation_tree.set("parameters/Run/blend_position", input_vec)
 		animation_tree.set("parameters/Attack/blend_position", input_vec)
+		animation_tree.set("parameters/Roll/blend_position", input_vec)
 		animation_state.travel("Run")	
 		
 		velocity = velocity.move_toward(input_vec * MAX_SPEED, ACCELERATION)
@@ -47,11 +58,20 @@ func move_state():
 	if Input.is_action_just_pressed("attack"):
 		state = ATTACK
 	
+	if Input.is_action_just_pressed("roll"):
+		state = ROLL
+	
 func attack_state():
 	animation_state.travel("Attack")
 
 func roll_state():
-	pass
+	velocity = roll_vector * ROLL_SPEED
+	move_and_slide()
+	animation_state.travel("Roll")
 	
 func attack_finished():
+	state = MOVE
+
+func roll_finished():
+	velocity = Vector2.ZERO
 	state = MOVE

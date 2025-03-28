@@ -848,14 +848,18 @@ position = Vector2(32, 144)
 [node name="Grass21" parent="Grasses" instance=ExtResource("6_dwbse")]
 position = Vector2(256, 112)
 
-[node name="Bat" parent="." instance=ExtResource("7_pkg7o")]
+[node name="Bat" type="Node2D" parent="."]
+z_index = 2
+y_sort_enabled = true
+
+[node name="Bat" parent="Bat" instance=ExtResource("7_pkg7o")]
 z_index = 2
 position = Vector2(96, 96)
 
-[node name="Bat2" parent="." instance=ExtResource("7_pkg7o")]
+[node name="Bat2" parent="Bat" instance=ExtResource("7_pkg7o")]
 z_index = 2
 position = Vector2(248, 72)
 
-[node name="Bat3" parent="." instance=ExtResource("7_pkg7o")]
+[node name="Bat3" parent="Bat" instance=ExtResource("7_pkg7o")]
 z_index = 2
 position = Vector2(280, 136)

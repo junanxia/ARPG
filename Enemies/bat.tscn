@@ -1,9 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://dex31ybtclss0"]
+[gd_scene load_steps=16 format=3 uid="uid://dex31ybtclss0"]
 
 [ext_resource type="Script" uid="uid://cmhaexg1tccox" path="res://Enemies/bat.gd" id="1_g687e"]
 [ext_resource type="Texture2D" uid="uid://dhmbsu4vxlyei" path="res://Enemies/Bat.png" id="1_p2utt"]
 [ext_resource type="Texture2D" uid="uid://by2gv564b3ddc" path="res://Shadows/SmallShadow.png" id="2_vut0d"]
 [ext_resource type="PackedScene" uid="uid://c5vyc3fhvpt05" path="res://Hitbox and Hurtboxes/hurtbox.tscn" id="3_va2ne"]
+[ext_resource type="PackedScene" uid="uid://dmtp48csfuyds" path="res://stats.tscn" id="5_i84q7"]
+[ext_resource type="PackedScene" uid="uid://v0ut6wcn18gb" path="res://Effects/player_detection_zone.tscn" id="6_nc5xu"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vut0d"]
 atlas = ExtResource("1_p2utt")
@@ -55,8 +57,12 @@ radius = 4.0
 radius = 6.0
 height = 18.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_0g1cs"]
+radius = 47.0106
+
 [node name="Bat" type="CharacterBody2D"]
 collision_layer = 16
+collision_mask = 0
 script = ExtResource("1_g687e")
 
 [node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
@@ -73,13 +79,24 @@ texture = ExtResource("2_vut0d")
 shape = SubResource("CircleShape2D_vut0d")
 
 [node name="Hurtbox" parent="." instance=ExtResource("3_va2ne")]
-collision_layer = 0
 collision_mask = 8
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 position = Vector2(0, -13)
 shape = SubResource("CapsuleShape2D_g687e")
 
+[node name="Stats" parent="." instance=ExtResource("5_i84q7")]
+max_health = 2
+
+[node name="PlayerDetectionZone" parent="." instance=ExtResource("6_nc5xu")]
+
+[node name="CollisionShape2D" parent="PlayerDetectionZone" index="0"]
+shape = SubResource("CircleShape2D_0g1cs")
+debug_color = Color(0, 0.6, 0.701961, 0.12549)
+
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
+[connection signal="no_health" from="Stats" to="." method="_on_stats_no_health"]
 
 [editable path="Hurtbox"]
+[editable path="Stats"]
+[editable path="PlayerDetectionZone"]

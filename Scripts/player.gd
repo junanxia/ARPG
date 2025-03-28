@@ -7,11 +7,12 @@ enum {
 	IDEL,
 }
 
+@export var ACCELERATION : int = 500
+@export var MAX_SPEED : int = 100
+@export var ROLL_SPEED : int = 140
+@export var FRICTION : int = 500
+
 var state = MOVE
-const ACCELERATION = 500
-const MAX_SPEED = 100
-const ROLL_SPEED = 100
-const FRICTION = 500
 var roll_vector = Vector2.DOWN
 
 @onready var animation_tree: AnimationTree = $AnimationTree

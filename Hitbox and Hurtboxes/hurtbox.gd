@@ -27,7 +27,6 @@ func create_effect():
 	effect.global_position = global_position	
 
 func _on_timer_timeout() -> void:
-	print("Time out")
 	self.invincible = false
 
 func _on_invincible_started() -> void:

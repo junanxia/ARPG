@@ -23,7 +23,6 @@ var stats = PlayerStats
 
 func _ready() -> void:
 	stats.connect("no_health", Callable(self, "queue_free"))
-	print("Player Health:", stats.health)
 	
 	animation_tree.active = true
 	sword_hitbox.knockback_vector = roll_vector
@@ -65,6 +64,7 @@ func move_state():
 		state = ATTACK
 	
 	if Input.is_action_just_pressed("roll"):
+		#PlayerStats.max_health += 1
 		state = ROLL
 	
 func attack_state():
@@ -83,7 +83,6 @@ func roll_finished():
 	state = MOVE
 
 func _on_hurtbox_area_entered(_area: Area2D) -> void:
-	print("Player Hurt!")
 	stats.health -= 1
 	
 	hurtbox.start_invincibleity(0.5)

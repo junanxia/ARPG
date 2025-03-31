@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://5urs5fghs3hq"]
+[gd_scene load_steps=6 format=3 uid="uid://5urs5fghs3hq"]
 
 [ext_resource type="Texture2D" uid="uid://o5phpabvwgb6" path="res://World/Grass.png" id="1_8pjrw"]
 [ext_resource type="Script" uid="uid://bm10kw5nl1sf3" path="res://World/grass.gd" id="1_c5e5s"]
+[ext_resource type="Texture2D" uid="uid://dhvymqdk76a37" path="res://Shadows/MediumShadow.png" id="2_158md"]
 [ext_resource type="PackedScene" uid="uid://c5vyc3fhvpt05" path="res://Hitbox and Hurtboxes/hurtbox.tscn" id="3_qjf00"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_158md"]
@@ -10,6 +11,10 @@ size = Vector2(14, 13)
 [node name="Grass" type="Node2D"]
 script = ExtResource("1_c5e5s")
 
+[node name="Shadows" type="Sprite2D" parent="."]
+position = Vector2(8, 11)
+texture = ExtResource("2_158md")
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_8pjrw")
 centered = false
@@ -17,7 +22,6 @@ offset = Vector2(-8, -8)
 
 [node name="Hurtbox" parent="." instance=ExtResource("3_qjf00")]
 collision_mask = 8
-show_hit = false
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
 position = Vector2(8, 7.5)

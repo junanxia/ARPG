@@ -7,6 +7,7 @@ extends CharacterBody2D
 @onready var stats: Node = $Stats
 @onready var player_detection_zone: Area2D = $PlayerDetectionZone
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite
+@onready var hurtbox: Area2D = $Hurtbox
 
 const Effect = preload("res://Effects/enemy_death_effect.tscn")
 
@@ -53,6 +54,7 @@ func seek_player():
 func _on_hurtbox_area_entered(area: Area2D) -> void:
 	stats.health -= area.damage
 	velocity = area.knockback_vector * 120
+	hurtbox.start_invincibleity(0.5)
 
 func _on_stats_no_health() -> void:
 	create_effect()

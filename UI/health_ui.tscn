@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://u7kocflls2k6"]
+
+[ext_resource type="Script" uid="uid://bt3wbeqi7oumv" path="res://UI/health_ui.gd" id="1_nc0x1"]
+[ext_resource type="Texture2D" uid="uid://brdm7pqaeei0l" path="res://UI/HeartUIEmpty.png" id="2_21wld"]
+[ext_resource type="Texture2D" uid="uid://idiks8uvkyoe" path="res://UI/HeartUIFull.png" id="3_q726p"]
+
+[node name="HealthUI" type="Control"]
+z_index = 2
+layout_mode = 3
+anchors_preset = 0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 91.0
+offset_bottom = 14.0
+script = ExtResource("1_nc0x1")
+
+[node name="HeartUIEmpty" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 90.0
+offset_bottom = 11.0
+texture = ExtResource("2_21wld")
+stretch_mode = 1
+
+[node name="HeartUIFull" type="TextureRect" parent="."]
+clip_contents = true
+layout_mode = 0
+offset_right = 15.0
+offset_bottom = 11.0
+texture = ExtResource("3_q726p")
+stretch_mode = 1

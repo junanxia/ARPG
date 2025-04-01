@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b5ht1ilgmnrjo"]
+
+[ext_resource type="Script" uid="uid://cx7efh8yfa7rt" path="res://Hitbox and Hurtboxes/player_hurt_sound.gd" id="1_q8kx2"]
+
+[node name="PlayerHurtSound" type="AudioStreamPlayer"]
+script = ExtResource("1_q8kx2")

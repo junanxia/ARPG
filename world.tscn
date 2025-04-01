@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://snhapmxv138n"]
+[gd_scene load_steps=15 format=4 uid="uid://snhapmxv138n"]
 
 [ext_resource type="Texture2D" uid="uid://pupau2pnvy8b" path="res://World/GrassBackground.png" id="1_tlwt5"]
 [ext_resource type="Texture2D" uid="uid://cd3p0qxb7dk7o" path="res://World/DirtTileset.png" id="2_aqk2v"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dex31ybtclss0" path="res://Enemies/bat.tscn" id="7_pkg7o"]
 [ext_resource type="PackedScene" uid="uid://u7kocflls2k6" path="res://UI/health_ui.tscn" id="8_gbfbk"]
 [ext_resource type="PackedScene" uid="uid://dkd001kv78ia" path="res://World/tree.tscn" id="8_ioo17"]
+[ext_resource type="AudioStream" uid="uid://d0jl4ysf5mjpv" path="res://Music and Sounds/Music.mp3" id="10_wse8f"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_aqk2v"]
 texture = ExtResource("2_aqk2v")
@@ -757,6 +758,14 @@ z_index = 2
 position = Vector2(171, 100)
 metadata/_edit_group_ = true
 
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
+remote_path = NodePath("../../Camera2D")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(171, 100)
+position_smoothing_enabled = true
+rotation_smoothing_enabled = true
+
 [node name="Brushes" type="Node2D" parent="."]
 y_sort_enabled = true
 
@@ -876,4 +885,12 @@ position = Vector2(144, 80)
 [node name="Tree2" parent="Trees" instance=ExtResource("8_ioo17")]
 position = Vector2(88, 168)
 
-[node name="HealthUI" parent="." instance=ExtResource("8_gbfbk")]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HealthUI" parent="CanvasLayer" instance=ExtResource("8_gbfbk")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_wse8f")
+volume_db = -10.0
+autoplay = true
+parameters/looping = false
